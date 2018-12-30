@@ -17,7 +17,7 @@ import org.springframework.context.annotation.FilterType;
  */
 
 @Configuration
-@ComponentScan(excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = EnableWebMvc.class))
+@ComponentScan(basePackages = {"com.example.mvc"}, excludeFilters = @Filter(type = FilterType.ANNOTATION, classes = EnableWebMvc.class))
 public class RootJavaConfig {
 	// middle-tier bean configuration will be here
 }

@@ -1,0 +1,73 @@
+/**
+ * 
+ */
+package com.example.mvc.web;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.mvc.dto.Spittle;
+import com.example.mvc.service.SpittleRepository;
+
+/**
+ * @author amit
+ *
+ */
+
+@Controller
+@RequestMapping(path = "/spittles")
+public class SpittleCotroller {
+
+	@Autowired
+	private SpittleRepository spittleRepository;
+	
+	/**
+	 * Version -1 
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public String spittles(Model model) {
+		List<Spittle> spittles = spittleRepository.findSpittles(10, 20);
+		model.addAttribute(spittles); // Model attribute name will be auto-generated or inferred from type of attribute object.
+		return "spittles";
+	}
+	
+	
+	/**
+	 * Version -2
+	 * This is how can explicitly pass attribute name for model object
+	 */
+	/*@RequestMapping(method = RequestMethod.GET)
+	public String spittles(Model model) {
+		List<Spittle> spittles = spittleRepository.findSpittles(10, 20);
+		model.addAttribute("spittleList", spittles); 
+		return "spittles";
+	}*/
+	
+	/**
+	 * Version -3
+	 * We can ask for non java type as well for model, if we do not want to use Spring Model class.
+	 */
+	/*@RequestMapping(method = RequestMethod.GET)
+	public String spittles(Map model) { 
+		List<Spittle> spittles = spittleRepository.findSpittles(10, 20);
+		model.put("spittleList", spittles);
+		return "spittles";
+	}*/
+	
+	/**
+	 * This is smartest version, 
+	 * Model -> will be attribute containing return value
+	 * Attribute -> The one which are returning
+	 * Attribute Name -> Will be derived from type of attribute we are returning from controller
+	 * LogicalView Name -> Will be derived from and same as request path (Get - /spittles after removing leading / it will be 'spittles')
+	 * @return
+	 */
+	/*@RequestMapping(method = RequestMethod.GET)
+	public List<Spittle> spittles() { 
+		return spittleRepository.findSpittles(10, 20);
+	}*/
+}
