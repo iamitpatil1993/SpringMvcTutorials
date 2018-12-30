@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,4 +73,29 @@ public class SpittleCotroller {
 	public List<Spittle> spittles() { 
 		return spittleRepository.findSpittles(10, 20);
 	}*/
+	
+	/**
+	 * PathParam - Version -1
+	 * 
+	 * Explicitly specify path param name in @PathVariable annotation to identify math variable to match to method argument.
+	 */
+/*	@RequestMapping(path = "/{spittleId}", method = RequestMethod.GET)
+	public String spittle(@PathVariable(name = "spittleId") Long spittleId, Model model) {
+		model.addAttribute(spittleRepository.findById(spittleId));
+		return "spittle";
+	}*/
+	
+	/**
+	 * PathParam - Version -2
+	 * 
+	 * If method parameter name is same as path variable name it automatically takes the value of path variable, we do not need 
+	 * to explicitly path param name.
+	 * BUT, if we change method argument name or path variable name, it will start failing, so we need to maintain consistency
+	 * between path variable name and method argument name.
+	 */
+	@RequestMapping(path = "/{spittleId}", method = RequestMethod.GET)
+	public String spittle(@PathVariable Long spittleId, Model model) {
+		model.addAttribute(spittleRepository.findById(spittleId));
+		return "spittle";
+	}
 }

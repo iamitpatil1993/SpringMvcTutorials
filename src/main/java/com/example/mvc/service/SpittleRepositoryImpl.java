@@ -32,4 +32,12 @@ public class SpittleRepositoryImpl implements SpittleRepository {
 		}
 		return spittles;
 	}
+	
+	@Override
+	public Spittle findById(Long spittleId) {
+		List<Spittle> spittles = findSpittles(spittleId, 1);
+		Spittle spittle = spittles.get(0);
+		spittle.setId(spittleId);
+		return spittle;
+	}
 }

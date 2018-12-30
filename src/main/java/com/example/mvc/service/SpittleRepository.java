@@ -15,4 +15,5 @@ import com.example.mvc.dto.Spittle;
 public interface SpittleRepository {
 
 	public List<Spittle> findSpittles(Long max, Integer count);
+	public Spittle findById(Long spittleId);
 }

@@ -88,4 +88,17 @@ public class SpittleCotrollerTest {
 		.andExpect(model().attribute("spittleList", hasSize(5)));
 	}
 
+	/**
+	 * Path-Param test
+	 * Note the use of hamcrest matchers to assert the Model attribute and their nested properties and their values.
+	 * @throws Exception
+	 */
+	@Test
+	public void testSpittle() throws Exception {
+		mockMvc.perform(get("/spittles/34"))
+		.andExpect(view().name("spittle"))
+		.andExpect(model().attribute("spittle", notNullValue(Spittle.class)))
+		.andExpect(model().attribute("spittle", instanceOf(Spittle.class)))
+		.andExpect(model().attribute("spittle", hasProperty("id", is(34L)))); // This is how u can check individual properties and their values as well.
+	}
 }
