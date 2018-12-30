@@ -10,7 +10,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  *
  */
 
-public class DispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	/**
 	 * This defines javaConfig class for middler-tier beans which are shared by all web components.
