@@ -9,7 +9,9 @@ import static org.hamcrest.Matchers.emptyCollectionOf;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.not;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.List;
@@ -101,4 +103,15 @@ public class SpittleCotrollerTest {
 		.andExpect(model().attribute("spittle", instanceOf(Spittle.class)))
 		.andExpect(model().attribute("spittle", hasProperty("id", is(34L)))); // This is how u can check individual properties and their values as well.
 	}
+	
+	@Test
+	public void testShowRegisterPage( ) throws Exception {
+		mockMvc.perform(get("/spittles/register")).andExpect(view().name("register"));
+	}
+	
+	@Test
+	public void testRegister() throws Exception {
+		mockMvc.perform(post("/spittles/register").param("fistName", "Ramesh").param("lastName", "Jadhav").param("username", "rjadhav").param("password", "adsf1234")).andExpect(redirectedUrl("/spittles/profile/rjadhav"));
+	}
+	
 }

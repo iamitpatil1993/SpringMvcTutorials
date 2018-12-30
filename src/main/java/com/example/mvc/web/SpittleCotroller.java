@@ -4,6 +4,9 @@
 package com.example.mvc.web;
 import java.util.List;
 
+import org.aspectj.lang.annotation.RequiredTypes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,8 @@ import com.example.mvc.service.SpittleRepository;
 @Controller
 @RequestMapping(path = "/spittles")
 public class SpittleCotroller {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SpittleCotroller.class);
 
 	@Autowired
 	private SpittleRepository spittleRepository;
@@ -97,5 +102,23 @@ public class SpittleCotroller {
 	public String spittle(@PathVariable Long spittleId, Model model) {
 		model.addAttribute(spittleRepository.findById(spittleId));
 		return "spittle";
+	}
+	
+	@RequestMapping(path = "/register", method = RequestMethod.GET)
+	public String showRegisterPage() {
+		return "register";
+	}
+	
+	@RequestMapping(path = "/register", method = RequestMethod.POST)
+	public String register(Spittle spittle) {
+		logger.info("Insidr register ...");
+		spittleRepository.create(spittle);
+		return "redirect:/spittles/profile/" + spittle.getUsername();
+	}
+	
+	@RequestMapping(path = "/profile/{username}")
+	public String showSpittleProfile(@PathVariable String username, Model model) {
+		model.addAttribute("spitter", spittleRepository.findByUsername(username).get());
+		return "profile";
 	}
 }
