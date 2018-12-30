@@ -125,11 +125,18 @@
 
 
 		<!-- Test -->
+		<!-- Minimum version of junit required for spring mvc test framework is 4.12 so, I need to upgrade this dependency -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
 		</dependency>
 	</dependencies>
 	<build>
