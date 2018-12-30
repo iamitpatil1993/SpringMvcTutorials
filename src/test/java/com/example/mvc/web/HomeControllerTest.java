@@ -55,6 +55,16 @@ public class HomeControllerTest {
 	}
 	
 	/**
+	 * Test method for {@link com.example.mvc.web.HomeController#home()}.
+	 * Test with /home url mapping
+	 * @throws Exception 
+	 */
+	@Test
+	public void testHome1() throws Exception {
+		mockMvc.perform(get("/home")).andExpect(view().name("home"));
+	}
+	
+	/**
 	 * This test shows/verifies that, out WebApplicationContext is initialized correctly and we are using mocked servletContext.
 	 */
 	@Test
