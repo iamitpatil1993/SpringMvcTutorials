@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.mvc.dto.Spittle;
 import com.example.mvc.service.SpittleRepository;
@@ -29,8 +30,9 @@ public class SpittleCotroller {
 	 * Version -1 
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String spittles(Model model) {
-		List<Spittle> spittles = spittleRepository.findSpittles(10, 20);
+	public String spittles(@RequestParam(name = "max", defaultValue = "20") Long max,
+			@RequestParam(name = "count", defaultValue = "20") Integer count, Model model) {
+		List<Spittle> spittles = spittleRepository.findSpittles(max, count);
 		model.addAttribute(spittles); // Model attribute name will be auto-generated or inferred from type of attribute object.
 		return "spittles";
 	}

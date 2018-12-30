@@ -24,7 +24,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
+import static org.hamcrest.Matchers.*;
 import com.example.mvc.configuration.RootJavaConfig;
 import com.example.mvc.configuration.WebConfig;
 import com.example.mvc.dto.Spittle;
@@ -51,6 +51,7 @@ public class SpittleCotrollerTest {
 
 	/**
 	 * Test method for {@link com.example.mvc.web.SpittleCotroller#spittles(org.springframework.ui.Model)}.
+	 * This test passes, since we have passed default value to query/request parameters
 	 * @throws Exception 
 	 */
 	@Test
@@ -61,6 +62,30 @@ public class SpittleCotrollerTest {
 		.andExpect(model().attribute("spittleList", isA(List.class)))
 		.andExpect(model().attribute("spittleList", not(emptyCollectionOf(Spittle.class))))
 		.andExpect(model().attribute("spittleList", everyItem(instanceOf(Spittle.class))));
+	}
+
+	/**
+	 * Version-1 : Passes request parameters via methods - More elegant way
+	 * @throws Exception
+	 */
+	@Test
+	public void testSpittlesWithQueryParameters() throws Exception {
+		mockMvc.perform(get("/spittles").param("max", "10").param("count", "5")) 
+		.andExpect(view().name("spittles"))
+		.andExpect(model().attribute("spittleList", not(emptyCollectionOf(Spittle.class))))
+		.andExpect(model().attribute("spittleList", hasSize(5)));
+	}
+
+	/**
+	 * Version-2 : Passes request parameters via uri itself
+	 * @throws Exception
+	 */
+	@Test
+	public void testSpittlesWithQueryParameters2() throws Exception {
+		mockMvc.perform(get("/spittles?max=10&count=5")) 
+		.andExpect(view().name("spittles"))
+		.andExpect(model().attribute("spittleList", not(emptyCollectionOf(Spittle.class))))
+		.andExpect(model().attribute("spittleList", hasSize(5)));
 	}
 
 }

@@ -20,7 +20,7 @@ import com.example.mvc.dto.Spittle;
 public class SpittleRepositoryImpl implements SpittleRepository {
 
 	@Override
-	public List<Spittle> findSpittles(long max, int count) {
+	public List<Spittle> findSpittles(Long max, Integer count) {
 		List<Spittle> spittles = new ArrayList<>(count);
 		for (int i = 0; i < count; i++) {
 			Double id = Math.random() * max;
