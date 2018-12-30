@@ -19,6 +19,9 @@
 						value="${spittle.latitude}" />, <c:out
 						value="${spittle.longitude}" />)
 				</span>
+				<div>
+					<a href="<c:url value="/spittles/${spittle.id}" />">Link</a>
+				</div>
 			</div>
 		</li>
 	</c:forEach>
