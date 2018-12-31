@@ -95,6 +95,16 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
+	
+		<!-- Form validation using Java Validation API (JSR-303) -->
+		<!-- Spring's support for bean validation via Hibernate as a implementation -->
+		<!-- Spring itself do not provides implementation of JS$-303 rather it supports use of it. Rather we just need to add 
+		JSR-303 implementation jars to project's classpath-->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.13.Final</version>
+		</dependency>
 
 		<!-- It was initially present in created project, I don't know why they addded this dependecy, because I used this dependency for
 		@Inject annotation which can be used in place of @Component, currently commenting this, as project able to build and run, Will uncomment if required -->

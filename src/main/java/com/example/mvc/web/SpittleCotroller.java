@@ -4,12 +4,15 @@
 package com.example.mvc.web;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.aspectj.lang.annotation.RequiredTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -110,8 +113,11 @@ public class SpittleCotroller {
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
-	public String register(Spittle spittle) {
+	public String register(@Valid Spittle spittle, Errors validationErrors) {
 		logger.info("Insidr register ...");
+		if (validationErrors.hasErrors()) {
+			return "redirect:/spittles/register"; // If there are errors in validation, just redirect to same registration form.
+		}
 		spittleRepository.create(spittle);
 		return "redirect:/spittles/profile/" + spittle.getUsername();
 	}

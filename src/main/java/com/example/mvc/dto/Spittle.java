@@ -5,6 +5,9 @@ package com.example.mvc.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * @author amit Model class to represent Spittle.
  *
@@ -17,9 +20,19 @@ public class Spittle {
 	private Date time;
 	private Double latitude;
 	private Double longitude;
+	
+	// Directly use java validation api annotations for bean validation, and spring will handle everything.
+	@NotNull(message = "Provide first name")
 	private String firstName;
+	
+	@NotNull(message = "Provide last name")
 	private String lastName;
+	
+	@NotNull
+	@Size(max = 30, min = 4, message = "Username must be of size between 4 to 30")
 	private String username;
+	
+	@NotNull
 	private String password;
 
 	public Long getId() {
