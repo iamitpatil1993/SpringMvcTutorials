@@ -7,7 +7,11 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.Matchers.emptyCollectionOf;
 import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -16,19 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import static org.hamcrest.Matchers.*;
-import com.example.mvc.configuration.RootJavaConfig;
-import com.example.mvc.configuration.WebConfig;
+
 import com.example.mvc.dto.Spittle;
 
 /**
@@ -36,20 +29,7 @@ import com.example.mvc.dto.Spittle;
  *
  */
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {RootJavaConfig.class, WebConfig.class})
-@WebAppConfiguration
-public class SpittleCotrollerTest {
-
-	@Autowired
-	private WebApplicationContext wc;
-
-	private MockMvc mockMvc;
-
-	@Before
-	public void before() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(wc).build();
-	}
+public class SpittleCotrollerTest extends BaseTest {
 
 	/**
 	 * Test method for {@link com.example.mvc.web.SpittleCotroller#spittles(org.springframework.ui.Model)}.
