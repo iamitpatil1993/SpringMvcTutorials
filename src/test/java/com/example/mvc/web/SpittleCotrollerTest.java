@@ -64,7 +64,7 @@ public class SpittleCotrollerTest extends BaseTest {
 	 */
 	@Test
 	public void testSpittlesWithQueryParameters2() throws Exception {
-		mockMvc.perform(get("/spittles?max=10&count=5")) 
+		mockMvc.perform(get("/spittles").param("max", "10").param("count", "5")) // correct way to pass query/form parameters
 		.andExpect(view().name("spittles"))
 		.andExpect(model().attribute("spittleList", not(emptyCollectionOf(Spittle.class))))
 		.andExpect(model().attribute("spittleList", hasSize(5)));
@@ -77,7 +77,7 @@ public class SpittleCotrollerTest extends BaseTest {
 	 */
 	@Test
 	public void testSpittle() throws Exception {
-		mockMvc.perform(get("/spittles/34"))
+		mockMvc.perform(get("/spittles/{spittleId}", "34")) // correct way to pass path parameter.
 		.andExpect(view().name("spittle"))
 		.andExpect(model().attribute("spittle", notNullValue(Spittle.class)))
 		.andExpect(model().attribute("spittle", instanceOf(Spittle.class)))
