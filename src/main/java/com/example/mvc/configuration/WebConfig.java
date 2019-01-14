@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 /**
  * @author amit
@@ -27,7 +29,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @ComponentScan(basePackages = "com.example.mvc.web") // Specify package containing web components
 @EnableWebMvc // Enables spring mvc
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter class is deprecated in spring 5, so we can use WebMvcConfigurer directly.  What WebMvcConfigurerAdapter doing is, providing default (empty) implementation for WebMvcConfigurer interface so that we can override only required methods from WebMvcConfigurer interface. But Java 8, have added support that interface methods can have default implementations, so Adaptrer class is of no use no and we can implement interface directly and override only required methods, since interface provides default implementation for others.    
 	
 	/**
 	 * This is ViewResolver declaration, here we are defining JSP view resolver.
@@ -39,6 +41,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		viewResolver.setPrefix("/WEB-INF/views/");
 		viewResolver.setSuffix(".jsp");
 		viewResolver.setExposeContextBeansAsAttributes(true);
+		viewResolver.setViewClass(JstlView.class); // In order to use JSTL in our JSP pages, we need to use JstlView
+													// over InternalResourceView. Till not it was working without
+													// setting this property because spring automatically checks the
+													// class path for JSTL config class exists and can be loaded? If it
+													// exists and can be loaded it will automatically set jstlEnabled
+													// flag to true and uses JstlView over InternalResourceView.
+													// Check InternalResourceViewResolver() constructor implementation in source.
 		return viewResolver;
 	}
 	
