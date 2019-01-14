@@ -42,7 +42,7 @@ public class SpittleCotroller {
 			@RequestParam(name = "count", defaultValue = "20") Integer count, Model model) {
 		List<Spittle> spittles = spittleRepository.findSpittles(max, count);
 		model.addAttribute(spittles); // Model attribute name will be auto-generated or inferred from type of attribute object.
-		return "spittles";
+		return "spittle/spittles"; // we can specify directories as well. if spring files slash in view name it considers them as directory and append then to physical path as it is without doing anything. So, now we can organize our views in directories instead of having them in single flag /views directory
 	}
 	
 	
@@ -103,12 +103,12 @@ public class SpittleCotroller {
 	@RequestMapping(path = "/{spittleId}", method = RequestMethod.GET)
 	public String spittle(@PathVariable Long spittleId, Model model) {
 		model.addAttribute(spittleRepository.findById(spittleId));
-		return "spittle";
+		return "spittle/spittle";
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
 	public String showRegisterPage() {
-		return "register";
+		return "spittle/register";
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
@@ -124,6 +124,6 @@ public class SpittleCotroller {
 	@RequestMapping(path = "/profile/{username}")
 	public String showSpittleProfile(@PathVariable String username, Model model) {
 		model.addAttribute("spitter", spittleRepository.findByUsername(username).get());
-		return "profile";
+		return "spittle/profile";
 	}
 }
