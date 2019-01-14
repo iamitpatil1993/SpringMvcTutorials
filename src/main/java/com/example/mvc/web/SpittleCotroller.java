@@ -107,15 +107,17 @@ public class SpittleCotroller {
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
-	public String showRegisterPage() {
+	public String showRegisterPage(Model model) {
+		model.addAttribute(new Spittle()); // In order to render <sf:form> tag, there must be object in model, which form tag binds using 'modelAttribute' attribute of <sf:form> tag
 		return "spittle/register";
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
-	public String register(@Valid Spittle spittle, Errors validationErrors) {
+	public String register(@Valid Spittle spittle, Errors validationErrors, Model model) {
 		logger.info("Insidr register ...");
 		if (validationErrors.hasErrors()) {
-			return "redirect:/spittles/register"; // If there are errors in validation, just redirect to same registration form.
+			model.addAttribute(spittle);
+			return "spittle/register"; // we can't simply redirect, if we want to populate form again with submitted details, so we need to put submitted spittle object into model and just need to render the view
 		}
 		spittleRepository.create(spittle);
 		return "redirect:/spittles/profile/" + spittle.getUsername();
