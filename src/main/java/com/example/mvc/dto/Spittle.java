@@ -5,6 +5,8 @@ package com.example.mvc.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -22,19 +24,26 @@ public class Spittle {
 	private Double longitude;
 	
 	// Directly use java validation api annotations for bean validation, and spring will handle everything.
-	@NotNull(message = "Provide first name")
+	@NotNull()
+	@NotEmpty(message = "Provide first name")
 	private String firstName;
 	
-	@NotNull(message = "Provide last name")
+	@NotNull()
+	@NotEmpty(message = "Provide last name")
 	private String lastName;
 	
 	@NotNull
-	@Size(max = 30, min = 4, message = "Username must be of size between 4 to 30")
+	@Size(max = 30, min = 4, message = "Username must be of size between {min} to {max}")
 	private String username;
 	
 	@NotNull
+	@NotEmpty(message = "Provide password")
+	@Size(min = 5, max = 20, message = "Password must be of size between {min} to {max}")
 	private String password;
 	
+	@NotNull
+	@NotEmpty(message = "Provide email")
+	@Email(message = "Provide valid email")
 	private String email;
 
 	public Long getId() {

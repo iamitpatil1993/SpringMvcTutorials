@@ -1,0 +1,10 @@
+span.errors {
+	/* This is how we add errors class specific to elements inside span only */
+	color: red
+}
+
+div.errors {
+	/* This is how we add errors class specific to elements inside div only */
+	background-color: #ffcccc;
+	border: 2px solid red;
+}

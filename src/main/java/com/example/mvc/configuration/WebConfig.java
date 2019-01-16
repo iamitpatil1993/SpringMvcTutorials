@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -59,6 +59,15 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
+	}
+
+	/**
+	 * This use to map, for what request url to where spring should look for static resources. 
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(5);
+		//registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(100) // we can set time in seconds as well, for how much seconds we want to cache these resources. We can also define multiple resource mappings.
 	}
 
 }
