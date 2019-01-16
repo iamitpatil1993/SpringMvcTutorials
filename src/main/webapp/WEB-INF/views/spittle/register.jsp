@@ -17,11 +17,11 @@
 	<!-- So, this is similar to <form method = "POST" action = "/spittles/register"> -->
 	<sf:form modelAttribute="spittle" method="POST"> <!-- commandName attribute is deprecated over modelAttribute -->
 		<sf:errors path="*" element="div" cssClass="errors"/> <br/> <!--this tag can be added inside form tag only, it will work only if it is inside this form tag, because binding exists inside this form tag only and not outside. If used outside, it will have no effect and also will not give any error. -->
-		First Name : <sf:input path="firstName"/> <sf:errors path="firstName" cssClass="errors"/> <br/> 
-		Last Name : <sf:input path="lastName"/>  <sf:errors path="lastName" cssClass="errors"/> <br/>
-		Username : <sf:input path="username"/> <sf:errors path="username" cssClass="errors" /> <br/>
-		Email : <sf:input path="email"/> <sf:errors path="email" cssClass="errors"/>  <br/>  <!-- We can provide standard HTML 5 input types as well using type attribute -->
-		Password: <sf:password path="password"/> <sf:errors path="password" cssClass="errors"/> <br/>
+		<sf:label path="firstName" cssErrorClass="errors">First Name : </sf:label><sf:input path="firstName" cssErrorClass="errors"/> <sf:errors path="firstName" cssClass="errors"/> <br/> 
+		<sf:label path="lastName" cssErrorClass="errors">Last Name : </sf:label><sf:input path="lastName" cssErrorClass="errors"/>  <sf:errors path="lastName" cssClass="errors"/> <br/>
+		<sf:label path="username" cssErrorClass="errors">Username : </sf:label> <sf:input path="username" cssErrorClass="errors"/> <sf:errors path="username" cssClass="errors" /> <br/>
+		<sf:label path="email" cssErrorClass="errors">Email : </sf:label><sf:input path="email" cssErrorClass="errors"/> <sf:errors path="email" cssClass="errors"/>  <br/>  <!-- We can provide standard HTML 5 input types as well using type attribute -->
+		<sf:label path="password" cssErrorClass="errors">Password: </sf:label> <sf:password path="password" cssErrorClass="errors"/> <sf:errors path="password" cssClass="errors"/> <br/>
 		<input type="submit" value="Register" />
 	</sf:form>
 </body>
