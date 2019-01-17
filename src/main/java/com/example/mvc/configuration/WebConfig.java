@@ -3,9 +3,14 @@
  */
 package com.example.mvc.configuration;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -25,7 +30,6 @@ import org.springframework.web.servlet.view.JstlView;
  *
  */
 
-@SuppressWarnings("deprecation")
 @Configuration
 @ComponentScan(basePackages = "com.example.mvc.web") // Specify package containing web components
 @EnableWebMvc // Enables spring mvc
@@ -69,5 +73,40 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(5);
 		//registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(100) // we can set time in seconds as well, for how much seconds we want to cache these resources. We can also define multiple resource mappings.
 	}
-
+	
+	/**
+	 * We need to provide message source for resource bundle. We can use two classes for it ResourceBundleMessageSource or ReloadableResourceBundleMessageSource
+	 * This MessageSource uses JDKs default ResourceBundle locator implementation so we nned to follow conventions as mentioned in ResourceBundle java class docs.
+	 * This message source can  only look for resource bundle in class path and can't look in file system.
+	 * This message source can not reload resource bundle. Once read, it caches them forever and hence resources bundle can't be updated/reloaded at runtime and needs JVM restart.
+	 * @return
+	 */
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource bundleMessageSource = new ResourceBundleMessageSource();
+		bundleMessageSource.setBasenames("messagesource.spittle", "messagesource.ValidationMessagesSpittle"); 
+		bundleMessageSource.setDefaultEncoding("UTF-8");
+		return bundleMessageSource;
+	}
+	
+	/**
+	 * This is example of using ReloadableResourceBundleMessageSource to configure message source. Why use ReloadableResourceBundleMessageSource over ResourceBundleMessageSource, check online.
+	 * This message source can look for resource bundles in classpath as well as in file system.
+	 * It can reload resource bundles periodically, so we can use this messageSource implementation to update resource bundle at runtime without JVM restart.
+	 * Since, this resource bundle does not uses JDKs default resource locator implementation and uses it's implementation we can provide paths for resource bundles in spring specific way like prefix with classpath: or file: to refer resource bundle locations in classpath and/or file system.	
+	 */
+	/*@Bean
+	public MessageSource messageaSource() {
+		ReloadableResourceBundleMessageSource bundleMessageSource = new ReloadableResourceBundleMessageSource();
+		bundleMessageSource.setBasenames("classpath:messagesource/spittle", "classpath:messagesource/ValidationMessagesSpittle");
+		bundleMessageSource.setDefaultEncoding("UTF-8");
+		return bundleMessageSource;
+	}*/
+	
+	@Override
+	public Validator getValidator() {
+		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+	    bean.setValidationMessageSource(messageSource());
+	    return bean;
+	}
 }

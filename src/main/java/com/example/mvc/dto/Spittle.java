@@ -25,25 +25,32 @@ public class Spittle {
 	
 	// Directly use java validation api annotations for bean validation, and spring will handle everything.
 	@NotNull()
-	@NotEmpty(message = "Provide first name")
+	//@NotEmpty(message = "Provide first name")
+	@NotEmpty(message = "{spittle.firstname.notempty}")
 	private String firstName;
 	
 	@NotNull()
-	@NotEmpty(message = "Provide last name")
+	//@NotEmpty(message = "Provide last name")
+	@NotEmpty(message = "{spittle.lastName.notempty}")
 	private String lastName;
 	
 	@NotNull
-	@Size(max = 30, min = 4, message = "Username must be of size between {min} to {max}")
+	//@Size(max = 30, min = 4, message = "Username must be of size between {min} to {max}")
+	@Size(max = 30, min = 4, message = "{spittle.username.size}")
 	private String username;
 	
 	@NotNull
-	@NotEmpty(message = "Provide password")
-	@Size(min = 5, max = 20, message = "Password must be of size between {min} to {max}")
+	//@NotEmpty(message = "Provide password")
+	@NotEmpty(message = "{spittle.password.notempty}")
+	//@Size(min = 5, max = 20, message = "Password must be of size between {min} to {max}")
+	@Size(min = 5, max = 20, message = "{spittle.password.size}")
 	private String password;
 	
 	@NotNull
-	@NotEmpty(message = "Provide email")
-	@Email(message = "Provide valid email")
+	//@NotEmpty(message = "Provide email")
+	@NotEmpty(message = "{spittle.email.notempty}")
+	//@Email(message = "Provide valid email")
+	@Email(message = "{spittle.email.email}")
 	private String email;
 
 	public Long getId() {
