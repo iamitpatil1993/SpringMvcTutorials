@@ -84,7 +84,7 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	@Bean
 	public MessageSource messageSource() {
 		ResourceBundleMessageSource bundleMessageSource = new ResourceBundleMessageSource();
-		bundleMessageSource.setBasenames("messagesource.spittle", "messagesource.ValidationMessagesSpittle"); 
+		bundleMessageSource.setBasenames("messagesource.spittle", "messagesource.ValidationMessagesSpittle", "messagesource.webmessage.home"); 
 		bundleMessageSource.setDefaultEncoding("UTF-8");
 		return bundleMessageSource;
 	}
