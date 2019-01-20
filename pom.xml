@@ -18,6 +18,7 @@
 		<org.springframework-version>5.1.3.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.2</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<apache.tiles.version>3.0.8</apache.tiles.version>
 	</properties>
 	
 	<dependencies>
@@ -132,7 +133,13 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
+		
+		<!-- Apache tiles 3.** (Is only dependency we need for apache tiles). This dependency is required to access ties jstl tag library-->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>${apache.tiles.version}</version>
+		</dependency>
 
 		<!-- Test -->
 		<!-- Minimum version of junit required for spring mvc test framework is 4.12 so, I need to upgrade this dependency -->

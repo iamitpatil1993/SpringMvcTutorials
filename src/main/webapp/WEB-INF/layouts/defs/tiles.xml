@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<!-- This is our base template definition which will be used for all definitions 
+		as we base -->
+	<definition name="spittle.base"
+		template="/WEB-INF/layouts/templates/threeSectionsLayoutTemplate.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/layouts/tiles/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/layouts/tiles/footer.jsp" />
+	</definition>
+
+	<!-- Extend base definition to override body attribute value. NOTE: name 
+		of definition must match logical view name returned from Controller -->
+	<!-- Home page -->
+	<definition extends="spittle.base" name="home">
+		<put-attribute name="title" value="Spittle home" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/home.jsp" />
+	</definition>
+
+	<!-- spittles page -->
+	<definition extends="spittle.base" name="spittle/spittles">
+		<put-attribute name="title" value="Spittles" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/spittle/spittles.jsp" />
+	</definition>
+
+	<!-- spittle page -->
+	<definition extends="spittle.base" name="spittle/spittle">
+		<put-attribute name="title" value="Spittle" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/spittle/spittle.jsp" />
+	</definition>
+
+	<!-- register spittle page -->
+	<definition extends="spittle.base" name="spittle/register">
+		<put-attribute name="title" value="Spittle Registration" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/spittle/register.jsp" />
+	</definition>
+
+	<!-- spittle profile page -->
+	<definition extends="spittle.base" name="spittle/profile">
+		<put-attribute name="title" value="Spittle Profile" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/spittle/profile.jsp" />
+	</definition>
+</tiles-definitions>

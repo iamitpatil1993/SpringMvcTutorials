@@ -7,7 +7,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -18,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 /**
  * @author amit
@@ -108,5 +109,26 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 	    bean.setValidationMessageSource(messageSource());
 	    return bean;
+	}
+	
+	/**
+	 * We need to define this bean in order to configure Apache tiles container and definition files
+	 * @return
+	 */
+	@Bean(destroyMethod = "destroy") // Call destroy method to close TilesContainer before this bean get destroyed.
+	public TilesConfigurer tilesConfigurer() {
+		TilesConfigurer tilesConfigurer = new TilesConfigurer();
+		tilesConfigurer.setDefinitions("/WEB-INF/layouts/defs/tiles.xml"); // Provide list of apache tiles definition config files
+		tilesConfigurer.setCheckRefresh(true);
+		return tilesConfigurer;
+	}
+	
+	/**
+	 * We need to use TilesViewResolver over InternalResourceViewResolver. Configuration is simple, we need to just define this bean.
+	 * @return
+	 */
+	@Bean
+	public ViewResolver tilesViewResolver() {
+		return new TilesViewResolver();
 	}
 }
