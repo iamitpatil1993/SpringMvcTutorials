@@ -53,6 +53,11 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 													// exists and can be loaded it will automatically set jstlEnabled
 													// flag to true and uses JstlView over InternalResourceView.
 													// Check InternalResourceViewResolver() constructor implementation in source.
+		viewResolver.setOrder(10);  // In order to use tilesViewResolver over internalResorceViewResolver, we either
+									// need to remove this bean declaration or define it to be at low order. So, we
+									// are using setOrder to define this viewResolver to be at low order as compare
+									// to TilesViewResover declared below in this file.
+									// This is also called as ViewResolver chaining in spring.
 		return viewResolver;
 	}
 	
@@ -129,6 +134,11 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	 */
 	@Bean
 	public ViewResolver tilesViewResolver() {
-		return new TilesViewResolver();
+		TilesViewResolver tilesViewResolver = new TilesViewResolver();
+		tilesViewResolver.setOrder(0); // this is how we can do viewResolver chaining. Spring DispatcheServlet checks
+										// which viewResolver returns view from all declared viewResolvers in spring
+										// context. Using this setOrder() method we can chain view resolvers and define
+										// view resolver order.
+		return tilesViewResolver;
 	}
 }
