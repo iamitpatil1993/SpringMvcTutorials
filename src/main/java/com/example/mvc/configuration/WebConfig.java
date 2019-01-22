@@ -8,12 +8,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -140,5 +142,14 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 										// context. Using this setOrder() method we can chain view resolvers and define
 										// view resolver order.
 		return tilesViewResolver;
+	}
+	
+	/**
+	 * This is called as view controllers. Here we define static binding between url and logical view name of view to be rendered for that url.
+	 * This is mostly used when, there are uris or view in which case we do not have any logic in controller method other than just returning logical view name.
+	 */
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/homePage").setViewName("home"); // This says, when url is /homePage render view with logical view name "home". NOTE: It uses configured ViewResolver for determining actual view instance and implementation for same.
 	}
 }
