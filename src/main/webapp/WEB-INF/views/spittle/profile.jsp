@@ -13,5 +13,16 @@
 	<br />
 	<c:out value="${spitter.firstName}" />
 	<c:out value="${spitter.lastName}" />
+	<div>
+		<span><c:out value="${spitter.receiveNewsletter}" /></span>
+	</div>
+	<div>
+		<c:forEach var="interest" items="${spitter.interests}">
+			<p><c:out value="${interest}" /></p>
+		</c:forEach>
+	</div>
+	<div>
+		<span><c:out value="${spitter.favouriteWord}" /></span>
+	</div>
 </body>
 </html>

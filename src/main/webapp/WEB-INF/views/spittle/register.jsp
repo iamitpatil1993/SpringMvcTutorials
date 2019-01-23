@@ -22,6 +22,13 @@
 		<sf:label path="username" cssErrorClass="errors">Username : </sf:label> <sf:input path="username" cssErrorClass="errors"/> <sf:errors path="username" cssClass="errors" /> <br/>
 		<sf:label path="email" cssErrorClass="errors">Email : </sf:label><sf:input path="email" cssErrorClass="errors"/> <sf:errors path="email" cssClass="errors"/>  <br/>  <!-- We can provide standard HTML 5 input types as well using type attribute -->
 		<sf:label path="password" cssErrorClass="errors">Password: </sf:label> <sf:password path="password" cssErrorClass="errors"/> <sf:errors path="password" cssClass="errors"/> <br/>
+		<span>Subscribe to newsletter?: <sf:checkbox path="receiveNewsletter"/></span> <!-- this will bind boolean value -->
+		<div>
+		<span>Interests:</span> <!-- This will bind multiple values to collection/array in model attribute property -->
+		  <p>Quidditch: <sf:checkbox path="interests" value="Quidditch"/></p>
+          <p>Herbology: <sf:checkbox path="interests" value="Herbology"/></p>
+          <p>Defence Against the Dark Arts: <sf:checkbox path="interests" value="Defence Against the Dark Arts"></sf:checkbox></p> 
+		</div>
 		<input type="submit" value="Register" />
 	</sf:form>
 </body>

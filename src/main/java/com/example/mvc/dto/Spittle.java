@@ -23,6 +23,10 @@ public class Spittle {
 	private Double latitude;
 	private Double longitude;
 	
+    private boolean receiveNewsletter;
+    private String[] interests;
+    private String favouriteWord;
+	
 	// Directly use java validation api annotations for bean validation, and spring will handle everything.
 	@NotNull()
 	//@NotEmpty(message = "Provide first name")
@@ -131,6 +135,30 @@ public class Spittle {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isReceiveNewsletter() {
+		return receiveNewsletter;
+	}
+
+	public void setReceiveNewsletter(boolean receiveNewsletter) {
+		this.receiveNewsletter = receiveNewsletter;
+	}
+
+	public String[] getInterests() {
+		return interests;
+	}
+
+	public void setInterests(String[] interests) {
+		this.interests = interests;
+	}
+
+	public String getFavouriteWord() {
+		return favouriteWord;
+	}
+
+	public void setFavouriteWord(String favouriteWord) {
+		this.favouriteWord = favouriteWord;
 	}
 
 }
