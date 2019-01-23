@@ -29,6 +29,12 @@
           <p>Herbology: <sf:checkbox path="interests" value="Herbology"/></p>
           <p>Defence Against the Dark Arts: <sf:checkbox path="interests" value="Defence Against the Dark Arts"></sf:checkbox></p> 
 		</div>
+		
+		<div>
+			<p>Gender:</p>
+			<p>Male: <sf:radiobutton path="gender" value="Male"/></p>
+			<p>Female: <sf:radiobutton path="gender" value="Female"/></p>
+		</div>
 		<input type="submit" value="Register" />
 	</sf:form>
 </body>

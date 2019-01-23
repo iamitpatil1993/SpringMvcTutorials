@@ -26,6 +26,8 @@ public class Spittle {
     private boolean receiveNewsletter;
     private String[] interests;
     private String favouriteWord;
+    
+    private String gender;
 	
 	// Directly use java validation api annotations for bean validation, and spring will handle everything.
 	@NotNull()
@@ -159,6 +161,14 @@ public class Spittle {
 
 	public void setFavouriteWord(String favouriteWord) {
 		this.favouriteWord = favouriteWord;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 }

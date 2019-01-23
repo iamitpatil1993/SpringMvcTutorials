@@ -24,5 +24,9 @@
 	<div>
 		<span><c:out value="${spitter.favouriteWord}" /></span>
 	</div>
+	
+	<div>
+		<p>Gender: ${spitter.gender}</p>
+	</div>
 </body>
 </html>
