@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %> <!-- Spring form-binding tag library -->
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ page session="false" %>
+<%@ page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,5 +38,9 @@
 		</div>
 		<input type="submit" value="Register" />
 	</sf:form>
+
+	<pre>
+	<img alt="image"  src="<c:url value="/files/baeldung-rest-widget-main-1.2.0.jpg" />">
+</pre>
 </body>
 </html>
