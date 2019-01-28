@@ -1,5 +1,8 @@
 package com.example.mvc.configuration;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -63,5 +66,17 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
-
+	
+	/**
+	 * This method can be overridden to customize DispatcherServlet configurations.
+	 * Super classes has empty implementation of this method, and it calls this method after disptacher servlet registered to container.
+	 * So, this method is like hook to customize registered dispatcher servlet to servlet container.
+	 */
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setMultipartConfig(new MultipartConfigElement("/home/amit/")); // Adding multi-part support for registered DispatcherServlet
+		registration.setLoadOnStartup(1); // Making it to load on start up
+		registration.setInitParameter("dummyInitParam", "dummyValue"); // Adding init-param for DispatcherServlet.
+		// we can use other methods of Dynamic to customize registered DispatcherSrevlet to srevlet container.
+	}
 }
