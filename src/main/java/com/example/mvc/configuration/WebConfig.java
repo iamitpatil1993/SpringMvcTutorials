@@ -6,9 +6,10 @@ package com.example.mvc.configuration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
@@ -34,7 +35,8 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 
 @Configuration
-@ComponentScan(basePackages = "com.example.mvc.web") // Specify package containing web components
+@ComponentScan(basePackages = "com.example.mvc.web", excludeFilters = { // Exclude all filter classes
+		@Filter(type = FilterType.ASSIGNABLE_TYPE, classes = javax.servlet.Filter.class) }) // Specify package
 @EnableWebMvc // Enables spring mvc
 public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter class is deprecated in spring 5, so we can use WebMvcConfigurer directly.  What WebMvcConfigurerAdapter doing is, providing default (empty) implementation for WebMvcConfigurer interface so that we can override only required methods from WebMvcConfigurer interface. But Java 8, have added support that interface methods can have default implementations, so Adaptrer class is of no use no and we can implement interface directly and override only required methods, since interface provides default implementation for others.    
 	
