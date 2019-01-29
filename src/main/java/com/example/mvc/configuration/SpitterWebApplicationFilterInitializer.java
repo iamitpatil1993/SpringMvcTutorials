@@ -11,6 +11,7 @@ import org.springframework.web.WebApplicationInitializer;
 
 import com.example.mvc.web.filter.AuthFilter;
 import com.example.mvc.web.filter.RequestLoggingFilter;
+import com.example.mvc.web.listener.RequestLogger;
 
 @Order(2)
 public class SpitterWebApplicationFilterInitializer implements WebApplicationInitializer {
@@ -29,6 +30,9 @@ public class SpitterWebApplicationFilterInitializer implements WebApplicationIni
 		// 2. Auth filter will get called second, and actual controller after this filter
 		Dynamic authFilterRegistration = servletContext.addFilter("AuthFilter", AuthFilter.class);
 		authFilterRegistration.addMappingForUrlPatterns(null, false, "/spittles/*");
+	
+		// Add ServletRequestListener
+		servletContext.addListener(RequestLogger.class);
 	}
 
 }
