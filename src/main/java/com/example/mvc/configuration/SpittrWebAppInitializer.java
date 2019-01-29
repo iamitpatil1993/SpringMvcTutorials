@@ -1,5 +1,6 @@
 package com.example.mvc.configuration;
 
+import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
@@ -7,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import com.example.mvc.web.filter.DispatcherServletFilter;
 
 /**
  * 
@@ -78,5 +81,16 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		registration.setLoadOnStartup(1); // Making it to load on start up
 		registration.setInitParameter("dummyInitParam", "dummyValue"); // Adding init-param for DispatcherServlet.
 		// we can use other methods of Dynamic to customize registered DispatcherSrevlet to srevlet container.
+	}
+	
+	/**
+	 * Override this method and return array of filter that needs to be applied on DispatcherServlet only.
+	 * These filters will be registered to Servlet context and will be invoked on any request matching dispatcher servlet url pattern
+	 *
+	 *NOTE: Order in which we declare filters here, will be same order in which filters wlll be called. So, order of filter in array should be as per expected and should not be random
+	 */
+	@Override
+	protected Filter[] getServletFilters() {
+		return new Filter[] { new DispatcherServletFilter() };
 	}
 }
