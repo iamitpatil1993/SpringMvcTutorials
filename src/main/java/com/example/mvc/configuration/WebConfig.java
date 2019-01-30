@@ -12,6 +12,8 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -154,5 +156,15 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/homePage").setViewName("home"); // This says, when url is /homePage render view with logical view name "home". NOTE: It uses configured ViewResolver for determining actual view instance and implementation for same.
+		registry.addViewController("/fileupload").setViewName("fileUpload");
+	}
+	
+	/**
+	 * Simply declare StandaredMultipartResolver. We need this resolver in order to use Servlet 3.0 multipart request support.
+	 * @return
+	 */
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
 	}
 }

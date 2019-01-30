@@ -81,6 +81,9 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		registration.setLoadOnStartup(1); // Making it to load on start up
 		registration.setInitParameter("dummyInitParam", "dummyValue"); // Adding init-param for DispatcherServlet.
 		// we can use other methods of Dynamic to customize registered DispatcherSrevlet to srevlet container.
+		
+		// we need to declare temporary location where file should be kept during multipart file conversion. Without this it will not work
+		registration.setMultipartConfig(new MultipartConfigElement("/home/amit/spittleFiles"));
 	}
 	
 	/**
