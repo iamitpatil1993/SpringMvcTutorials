@@ -13,6 +13,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -164,8 +165,13 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	 * Simply declare StandaredMultipartResolver. We need this resolver in order to use Servlet 3.0 multipart request support.
 	 * @return
 	 */
+	//@Bean
+	public MultipartResolver multipartResolver1() {
+		return new StandardServletMultipartResolver();
+	}
+	
 	@Bean
 	public MultipartResolver multipartResolver() {
-		return new StandardServletMultipartResolver();
+		return new CommonsMultipartResolver();
 	}
 }
