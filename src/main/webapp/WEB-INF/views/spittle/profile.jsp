@@ -9,6 +9,10 @@
 </head>
 <body>
 	<h1>Your Profile</h1>
+	<div>
+		<img alt="Profile picture"
+			src="<c:url value="/profilepicture/${spitter.profilepicture.originalFilename}" />"  width="100" height="300">
+	</div>
 	<c:out value="${spitter.username}" />
 	<br />
 	<c:out value="${spitter.firstName}" />

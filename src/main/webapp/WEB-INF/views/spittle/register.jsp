@@ -27,8 +27,6 @@
 		
 		<div style="margin: 20px; border: thin; border-color: black; background: gray; padding: 20px;">
 			Select profile picture : <span><sf:input type="file" name="profilepicture" path = "profilepicture" accept="image/*"/></span>
-			<br/>
-			Select profile picture : <span><sf:input type="file" name="profilepicture" path = "profilepicture" accept="image/*"/></span>
 		</div>
 		<div>
 		<span>Interests:</span> <!-- This will bind multiple values to collection/array in model attribute property -->

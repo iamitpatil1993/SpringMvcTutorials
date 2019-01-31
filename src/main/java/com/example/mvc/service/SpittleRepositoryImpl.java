@@ -3,6 +3,8 @@
  */
 package com.example.mvc.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +52,15 @@ public class SpittleRepositoryImpl implements SpittleRepository {
 	public Long create(Spittle spittle) {
 		spittle.setId(System.currentTimeMillis());
 		spittles.add(spittle);
+		if (spittle.getProfilepicture() != null && !spittle.getProfilepicture().isEmpty()) {
+			try {
+				File location = new File("/home/amit/spittle/profiles/" + spittle.getProfilepicture().getOriginalFilename());
+				spittle.getProfilepicture().transferTo(location);
+				logger.info("profile picture saved successfullt");
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return spittle.getId();
 	}
 

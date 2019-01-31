@@ -3,9 +3,7 @@
  */
 package com.example.mvc.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -63,7 +61,7 @@ public class Spittle {
 	@Email(message = "{spittle.email.email}")
 	private String email;
 	
-	private List<MultipartFile> profilepicture = new ArrayList<>(1);
+	private MultipartFile profilepicture;
 
 	public Long getId() {
 		return id;
@@ -133,16 +131,16 @@ public class Spittle {
 		return password;
 	}
 
-	public List<MultipartFile> getProfilepicture() {
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public MultipartFile getProfilepicture() {
 		return profilepicture;
 	}
 
-	public void setProfilepicture(List<MultipartFile> profilepicture) {
+	public void setProfilepicture(MultipartFile profilepicture) {
 		this.profilepicture = profilepicture;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getEmail() {

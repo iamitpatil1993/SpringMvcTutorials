@@ -85,6 +85,7 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(5);
 		//registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(100) // we can set time in seconds as well, for how much seconds we want to cache these resources. We can also define multiple resource mappings.
 		registry.addResourceHandler("/files/**").addResourceLocations("file:/home/amit/"); // this is how we can provide mapping to resources on disk. We need to use 'file:' as a prefix and it spring will consider looking resource in file system.
+		registry.addResourceHandler("/profilepicture/**").addResourceLocations("file:/home/amit/spittle/profiles/");
 	}
 	
 	/**
