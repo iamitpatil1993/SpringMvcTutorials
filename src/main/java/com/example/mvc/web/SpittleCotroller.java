@@ -119,7 +119,9 @@ public class SpittleCotroller {
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
 	public String register(@Valid @ModelAttribute(name = "spittle") Spittle spittle, BindingResult validationErrors, Model model) {
 		logger.info("Insidr register ...");
-		logger.info("Recieved file, name :: {}, contentType :: {}, size :: {}", new Object[] {spittle.getProfilepicture().getOriginalFilename(), spittle.getProfilepicture().getContentType(), spittle.getProfilepicture().getSize()});
+		spittle.getProfilepicture().forEach(file -> {
+			logger.info("Recieved file, name :: {}, contentType :: {}, size :: {}", new Object[] {file.getOriginalFilename(), file.getContentType(), file.getSize()});
+		});
 		if (validationErrors.hasErrors()) {
 			validationErrors.addError(new ObjectError("spittle", "Neet bharana bhau form")); // this how we can add custom/object level/irrespective of any field add custom validation error message. It will be carried to view along with other validation errors in same manneer.
 			return "spittle/register"; // we can't simply redirect, if we want to populate form again with submitted details, so we need to put submitted spittle object into model and just need to render the view
