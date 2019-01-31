@@ -10,6 +10,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * @author amit Model class to represent Spittle.
  *
@@ -58,6 +60,8 @@ public class Spittle {
 	//@Email(message = "Provide valid email")
 	@Email(message = "{spittle.email.email}")
 	private String email;
+	
+	private MultipartFile profilepicture;
 
 	public Long getId() {
 		return id;
@@ -129,6 +133,14 @@ public class Spittle {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public MultipartFile getProfilepicture() {
+		return profilepicture;
+	}
+
+	public void setProfilepicture(MultipartFile profilepicture) {
+		this.profilepicture = profilepicture;
 	}
 
 	public String getEmail() {

@@ -26,7 +26,7 @@
 		<span>Subscribe to newsletter?: <sf:checkbox path="receiveNewsletter"/></span> <!-- this will bind boolean value -->
 		
 		<div style="margin: 20px; border: thin; border-color: black; background: gray; padding: 20px;">
-			Select profile picture : <span><input type="file" name="profilepicture" accept="image/*"/></span>
+			Select profile picture : <span><sf:input type="file" name="profilepicture" path = "profilepicture" accept="image/*"/></span>
 		</div>
 		<div>
 		<span>Interests:</span> <!-- This will bind multiple values to collection/array in model attribute property -->
