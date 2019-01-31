@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.mvc.dto.Spittle;
 import com.example.mvc.service.SpittleRepository;
@@ -115,8 +117,9 @@ public class SpittleCotroller {
 	}
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute(name = "spittle") Spittle spittle, BindingResult validationErrors, Model model) {
+	public String register(@RequestParam("profilepicture") MultipartFile profilepicture, @Valid @ModelAttribute(name = "spittle") Spittle spittle, BindingResult validationErrors, Model model) {
 		logger.info("Insidr register ...");
+		logger.info("Recieved file, name :: {}, contentType :: {}, size :: {}", new Object[] {profilepicture.getOriginalFilename(), profilepicture.getContentType(), profilepicture.getSize()});
 		if (validationErrors.hasErrors()) {
 			validationErrors.addError(new ObjectError("spittle", "Neet bharana bhau form")); // this how we can add custom/object level/irrespective of any field add custom validation error message. It will be carried to view along with other validation errors in same manneer.
 			return "spittle/register"; // we can't simply redirect, if we want to populate form again with submitted details, so we need to put submitted spittle object into model and just need to render the view
