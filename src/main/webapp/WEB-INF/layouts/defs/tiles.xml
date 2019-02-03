@@ -50,4 +50,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/spittle/profile.jsp" />
 	</definition>
+
+	<definition name="errors/notFound" extends="spittle.base">
+		<put-attribute name="title" value="Not found" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/errors/notFound.jsp" />
+	</definition>
 </tiles-definitions>
