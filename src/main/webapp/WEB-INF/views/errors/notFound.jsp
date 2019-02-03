@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
 					<div class="mb-4 lead">The resource you are looking for was
 						not found.</div>
 					<div class="mb-4 lead">${errorMessage}.</div>
-					<a href="https://www.totoprayogo.com/#" class="btn btn-link">Back
+					<a href="<s:url value="/" />" class="btn btn-link">Back
 						to Home</a>
 				</div>
 			</div>
