@@ -3,6 +3,7 @@
  */
 package com.example.mvc.web;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -18,10 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.mvc.dto.Spittle;
+import com.example.mvc.exception.SpittleNotFoundException;
 import com.example.mvc.service.SpittleRepository;
 
 /**
@@ -130,7 +130,12 @@ public class SpittleCotroller {
 	
 	@RequestMapping(path = "/profile/{username}")
 	public String showSpittleProfile(@PathVariable String username, Model model) {
-		model.addAttribute("spitter", spittleRepository.findByUsername(username).get());
+		Optional<Spittle> spittleOptional = spittleRepository.findByUsername(username);
+		if (!spittleOptional.isPresent()) {
+			// Spring will check, is there any HTTP status code mapped to this exception using @responseStatus annotation, if yes it sends configured http status code to response.
+			throw new SpittleNotFoundException("Spittle not found by username :: " + username);
+		}
+		model.addAttribute("spitter", spittleOptional.get());
 		return "spittle/profile";
 	}
 }
