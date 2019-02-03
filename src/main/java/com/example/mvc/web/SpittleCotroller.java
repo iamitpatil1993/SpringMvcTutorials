@@ -142,13 +142,4 @@ public class SpittleCotroller {
 		model.addAttribute("spitter", spittleOptional.get());
 		return "spittle/profile";
 	}
-	
-	@ResponseStatus(code = HttpStatus.NOT_FOUND) // As I said, this annotation is general purpose and can be used on controller methods to map response status code.
-	@ExceptionHandler(SpittleNotFoundException.class)
-	public ModelAndView handleSpittleNotFoundException(SpittleNotFoundException exception) {
-		// alll code in this is exactly similar to request handling code
-		ModelAndView modelAndView = new ModelAndView("errors/notFound");
-		modelAndView.addObject("errorMessage", exception.getMessage());
-		return modelAndView;
-	}
 }

@@ -28,7 +28,7 @@
 		<put-attribute name="title" value="Spittles" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/spittle/spittles.jsp" />
-	</definition>
+	</definition>	
 
 	<!-- spittle page -->
 	<definition extends="spittle.base" name="spittle/spittle">
