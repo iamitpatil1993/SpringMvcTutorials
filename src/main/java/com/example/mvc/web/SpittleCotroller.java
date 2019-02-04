@@ -120,6 +120,13 @@ public class SpittleCotroller {
 		return "spittle/register";
 	}
 	
+	/**
+	 * 
+	 * @param spittle
+	 * @param validationErrors
+	 * @param model We need this model attribute in order to put values of spring url template variables.
+	 * @return
+	 */
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
 	public String register(@Valid @ModelAttribute(name = "spittle") Spittle spittle, BindingResult validationErrors, Model model) {
 		logger.info("Insidr register ...");
@@ -129,7 +136,10 @@ public class SpittleCotroller {
 			return "spittle/register"; // we can't simply redirect, if we want to populate form again with submitted details, so we need to put submitted spittle object into model and just need to render the view
 		}
 		spittleRepository.create(spittle);
-		return "redirect:/spittles/profile/" + spittle.getUsername();
+		model.addAttribute("username", spittle.getUsername()); // since this model attribute matches variable in spring url template, it will replace at matching variable in url template.
+		model.addAttribute("spittleId", spittle.getId()); // any attribute of type primitive (single value) added to model will be set as a query parameter if it does not matches with named parameters.
+		//model.addAttribute("spittle", spittle); // even though we add this as a attribute it won't be added as a query parameter because it is a java bean
+		return "redirect:/spittles/profile/{username}";
 	}
 	
 	@RequestMapping(path = "/profile/{username}")
