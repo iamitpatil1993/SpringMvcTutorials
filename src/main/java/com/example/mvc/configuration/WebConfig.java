@@ -18,6 +18,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -25,6 +26,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+
+import com.example.mvc.web.interceptor.RequestTimeLoggingInterceptor;
 
 /**
  * @author amit
@@ -173,5 +176,13 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	@Bean
 	public MultipartResolver multipartResolver() {
 		return new CommonsMultipartResolver();
+	}
+	
+	/*
+	 * Provide one or more interceptors here, with or without urls to be applied on.
+	 */
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new RequestTimeLoggingInterceptor()); // By default get applied to all URL i.e /*
 	}
 }

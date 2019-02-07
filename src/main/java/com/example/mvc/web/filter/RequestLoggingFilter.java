@@ -31,6 +31,7 @@ public class RequestLoggingFilter implements Filter {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		logger.info("Request received for, uri :: " + httpServletRequest.getRequestURI() + " method :: " + httpServletRequest.getMethod());
 		chain.doFilter(request, response);
+		logger.info("Returning request.");
 	}
 
 	@Override

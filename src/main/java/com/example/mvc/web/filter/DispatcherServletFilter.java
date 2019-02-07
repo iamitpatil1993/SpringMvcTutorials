@@ -35,6 +35,7 @@ public class DispatcherServletFilter implements Filter {
 			throws IOException, ServletException {
 		LOGGER.info("Request received for dispacher servlet.");
 		chain.doFilter(request, response);
+		LOGGER.info("Returning request received for dispacher servlet.");
 	}
 
 	@Override

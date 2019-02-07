@@ -31,6 +31,7 @@ private static final Logger logger = LoggerFactory.getLogger(AuthFilter.class);
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		logger.info("Authenticating Request for, uri :: " + httpServletRequest.getRequestURI() + " method :: " + httpServletRequest.getMethod());
 		chain.doFilter(request, response);
+		logger.info("Returning request.");
 	}
 
 	@Override
