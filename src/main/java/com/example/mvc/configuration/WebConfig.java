@@ -27,6 +27,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import com.example.mvc.web.interceptor.RequestLoggingInterceptor;
 import com.example.mvc.web.interceptor.RequestTimeLoggingInterceptor;
 
 /**
@@ -183,6 +184,9 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new RequestTimeLoggingInterceptor()); // By default get applied to all URL i.e /*
+		registry.addInterceptor(new RequestTimeLoggingInterceptor()).order(5); // By default get applied to all URL i.e /*
+		registry.addInterceptor(new RequestLoggingInterceptor()).order(0);
+		// read "How to define order by of Interceptors?" in Mvc Note doc for ordering details.
+		//https://docs.google.com/document/d/1cv6GKKhydpGF3PUIJQxZlWtW1boOz8XXrAh6tVAKSaU/edit#
 	}
 }
