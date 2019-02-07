@@ -10,19 +10,16 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.mvc.dto.Spittle;
 import com.example.mvc.exception.SpittleNotFoundException;
@@ -128,7 +125,7 @@ public class SpittleCotroller {
 	 * @return
 	 */
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute(name = "spittle") Spittle spittle, BindingResult validationErrors, Model model) {
+	public String register(@Valid @ModelAttribute(name = "spittle") Spittle spittle, BindingResult validationErrors, RedirectAttributes model) {
 		logger.info("Insidr register ...");
 		logger.info("Recieved file, name :: {}, contentType :: {}, size :: {}", new Object[] {spittle.getProfilepicture().getOriginalFilename(), spittle.getProfilepicture().getContentType(), spittle.getProfilepicture().getSize()});
 		if (validationErrors.hasErrors()) {
@@ -139,17 +136,24 @@ public class SpittleCotroller {
 		model.addAttribute("username", spittle.getUsername()); // since this model attribute matches variable in spring url template, it will replace at matching variable in url template.
 		model.addAttribute("spittleId", spittle.getId()); // any attribute of type primitive (single value) added to model will be set as a query parameter if it does not matches with named parameters.
 		//model.addAttribute("spittle", spittle); // even though we add this as a attribute it won't be added as a query parameter because it is a java bean
+		
+		model.addFlashAttribute("spitter", spittle);
 		return "redirect:/spittles/profile/{username}";
 	}
 	
 	@RequestMapping(path = "/profile/{username}")
 	public String showSpittleProfile(@PathVariable String username, Model model) {
-		Optional<Spittle> spittleOptional = spittleRepository.findByUsername(username);
-		if (!spittleOptional.isPresent()) {
-			// Spring will check, is there any HTTP status code mapped to this exception using @responseStatus annotation, if yes it sends configured http status code to response.
-			throw new SpittleNotFoundException("Spittle not found by username " + username);
+		if (!model.containsAttribute("spitter")) {
+			logger.info("Spittle object not available in model, fetching from repository ...");
+			Optional<Spittle> spittleOptional = spittleRepository.findByUsername(username);
+			if (!spittleOptional.isPresent()) {
+				// Spring will check, is there any HTTP status code mapped to this exception using @responseStatus annotation, if yes it sends configured http status code to response.
+				throw new SpittleNotFoundException("Spittle not found by username " + username);
+			}
+			model.addAttribute("spitter", spittleOptional.get());
+		} else {
+			logger.info("Spittle object available in model via flash attribute from last request, forwarding request to view ...");	
 		}
-		model.addAttribute("spitter", spittleOptional.get());
 		return "spittle/profile";
 	}
 }
