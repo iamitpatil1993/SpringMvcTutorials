@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.Ordered;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +26,14 @@ public class RequestLoggingInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		LOGGER.info("Inside Pre-handler");
+		String paramToDecideOperation = request.getParameter("interceptorOperation");
+		if (paramToDecideOperation != null && paramToDecideOperation.equalsIgnoreCase("throwException")) {
+			throw new IllegalStateException();	// throwing exception from here, can be handled by glbal exception handler declared in ControllerAdvise.
+		}
+		if (paramToDecideOperation != null && paramToDecideOperation.equalsIgnoreCase("redirect")) {
+			response.sendRedirect(request.getContextPath() + "/home"); // we can redirect, in that case we need to return false to tell DispatcherServlet that, we have handled the response and do not process request further.
+			return false; // if we return true from here, then above redirection will take place but, postHandle and afterCompletion handlers will get called, which will never want in case of redirection and exception.
+		}
 		return true;
 	}
 

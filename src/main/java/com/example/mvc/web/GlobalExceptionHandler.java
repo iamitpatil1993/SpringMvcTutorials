@@ -12,6 +12,11 @@ import com.example.mvc.exception.SpittleNotFoundException;
  * <p>This class is to demonstrate global exception handling in spring mvc.</p>
  * <p>This class is declared under *.web package, so it will be detected by dispatcher servlet and will be part of web application context created by dispatcher servlet</p>
  * <br/> It make more sese to declare these classes as a part of web app context and not part of root context because, we do not want these classes to be able to get injected into root context beans.
+ * <br/>
+ * This class can handle exceptions thrown from <br/>
+ *</t> 1. All controllers in application. <br/>
+ *</t> 2. All interceptors in applications.
+ * 
  * @author amit
  *
  */
