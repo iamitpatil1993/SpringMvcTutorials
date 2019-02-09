@@ -16,9 +16,9 @@
 			<h1>500</h1>
 			<p>Sorry, it's me, not you.</p>
 			<p>&#58;&#40;</p>
-			<p>
-				<a href="/">Let me try again!</a>
-			</p>
+			
+			<div class="mb-4 lead">${errorMessage}.</div>
+			<p><a href="<s:url value="/" />" class="btn btn-link">Back to Home</a></p>
 		</div>
 	</div>
 </body>
