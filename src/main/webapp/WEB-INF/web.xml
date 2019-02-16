@@ -4,13 +4,5 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-	<error-page>
-		<!-- If we do not configure <error-code> and <exception-type>, then container 
-			catches all errors in entire application here. -->
-			<!-- This above mentioned feature is availabe in servlet 3.0 and above spec only. And if we are using below version then,
-			we need to use either error_code or exception mapping. -->
-		<!-- Servlet spec 3.0 sends same HttpServletReuest and HttpServletResponse 
-			objects here, if <location> in <error-page> refers to jsp/servlet. -->
-		<location>/errors</location>
-	</error-page>
+	
 </web-app>

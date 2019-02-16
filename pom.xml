@@ -43,7 +43,21 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+	
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.1.2.RELEASE</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>5.1.2.RELEASE</version>
+		</dependency>
+			
+	
 		<!-- AspectJ -->
 		<!-- By default spring mvc template created dependency on aspectjrt, which is old one. So, I changed it to below one.
 		This is the only dependency required for spring AOP -->

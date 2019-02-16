@@ -32,8 +32,8 @@ public class GlobalExceptionHandler {
 		return modelAndView;
 	}
 	
-	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR) // As I said, this annotation is general purpose and can be used on controller methods to map response status code.
-	@ExceptionHandler(Throwable.class)
+	//@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR) // As I said, this annotation is general purpose and can be used on controller methods to map response status code.
+	//@ExceptionHandler(Throwable.class)
 	public String handleGenericException(Throwable exception) {
 		return "errors/internalServerError";
 	}
