@@ -3,6 +3,9 @@
  */
 package com.example.mvc.configuration.security;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +22,9 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity // Enabled web security
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // this adapter class implements WebSecurityConfigurer interface
 
+	@Autowired
+	private DataSource dataSource;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -29,13 +35,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // this ad
 		.formLogin(); // mode of authentication should be login page, witthuoud configuring this, it will not redirect u to login page if session expired, or authentication required rather simply give 403 error pgae.
 	}
 	
-	
-	@Override
+	/**
+	 * UserDetails Configuration using in memory data
+	 */
+	/*@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 		.inMemoryAuthentication() // we care using in memory data store
 		.passwordEncoder(NoOpPasswordEncoder.getInstance()) // default password encoder for password comparision is NoOpPasswordencoder (plain text passwords)
 		.withUser("amipatil").password("asdf1234").roles("USER").and() // user with USER role
 		.withUser("iamitpatil").password("asdf1234").roles("SPITTLE", "USER"); // USER with spittle and user role
+	}*/
+	
+	/**
+	 * UserDetails Configuration using in relational database
+	 */
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth
+		.jdbcAuthentication().dataSource(dataSource) // use daatasource to get user details 
+		.passwordEncoder(NoOpPasswordEncoder.getInstance()); // need to configure passwordEncoder as well.
 	}
 }
