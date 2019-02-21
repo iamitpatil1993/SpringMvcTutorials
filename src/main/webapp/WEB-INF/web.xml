@@ -4,5 +4,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
-	
+	<!-- For any 403 error it will redirect request to /errors handler will 
+		all request data. -->
+	<error-page>
+		<error-code>403</error-code>
+		<location>/errors</location>
+	</error-page>
 </web-app>

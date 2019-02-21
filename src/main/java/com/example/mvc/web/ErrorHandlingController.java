@@ -47,6 +47,8 @@ public class ErrorHandlingController {
 		modelAndView.addObject("errorMessage", message);
 		if (httpErroStatus.equals(404)) {
 			modelAndView.setViewName("errors/notFound");
+		} else if (httpErroStatus.equals(403)) {
+			modelAndView.setViewName("errors/forbidden");
 		} else {
 			modelAndView.setViewName("errors/internalServerError");
 		}

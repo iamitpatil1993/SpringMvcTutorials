@@ -40,8 +40,7 @@
 	<!-- register spittle page -->
 	<definition extends="spittle.base" name="spittle/register">
 		<put-attribute name="title" value="Spittle Registration" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/spittle/register.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/spittle/register.jsp" />
 	</definition>
 
 	<!-- spittle profile page -->
@@ -55,5 +54,11 @@
 		<put-attribute name="title" value="Not found" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/errors/notFound.jsp" />
+	</definition>
+	
+	<definition name="errors/forbidden" extends="spittle.base">
+		<put-attribute name="title" value="Spittle" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/errors/forbidden.jsp" />
 	</definition>
 </tiles-definitions>
