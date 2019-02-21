@@ -11,7 +11,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
+import com.example.mvc.configuration.springsecurity.custom.CustomUserDetailsService;
 import com.example.mvc.configuration.springsecurity.ldap.LDAPGrantedAuthoritiesMapper;
 import com.example.mvc.configuration.springsecurity.ldap.SecurityRoles;
 
@@ -72,4 +74,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // this ad
 		.managerDn("uid=admin,ou=system") // It will work without these manager configurations as well. Because, if we do not provide this, spring will create connection to LDAP server as anonymous user, and then will use BIND operation to authenticate and authorize user. But not all LDAP servers (vendors) supports anonymous users and also it is not secure to connect LDAP as a anonymous user.
 		.managerPassword("secret"); // so we should provide this manager user (admin user) details so that spring will connect to LDAP as admin user, which is very secure and allows us to add-on additional security usiing certificates.
 	}
+	
+	/**
+	 * Configuration using Custom UserDetailsService implementation
+	 */
+/*	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(new CustomUserDetailsService())
+		.passwordEncoder(NoOpPasswordEncoder.getInstance());
+	}
+	*/
 }
