@@ -14,11 +14,13 @@
 <body>
 
 	<s:url value="/files/upload" var="fileUploadAction"></s:url>
-	<form action="${fileUploadAction}" method="post" enctype="multipart/form-data">
+	<sf:form action="${fileUploadAction}" method="post"
+		enctype="multipart/form-data">
 		<p>
 			Select File up upload :: <input type="file" name="file" />
 		</p>
-		<br /> <input type="submit" name="submit" />
-	</form>
+		<br />
+		<input type="submit" name="submit" />
+	</sf:form>
 </body>
 </html>
