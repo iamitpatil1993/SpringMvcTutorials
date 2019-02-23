@@ -8,11 +8,11 @@
 	<name>SpringMvcTutorials</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	
-	<!-- This is auto-generated project using Spring MVC template in STS.
-	Below mentioned dependencies were already present in the generated project.
-	I have just updated the dependency versions to latest one. -->
-	
+
+	<!-- This is auto-generated project using Spring MVC template in STS. Below 
+		mentioned dependencies were already present in the generated project. I have 
+		just updated the dependency versions to latest one. -->
+
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.1.3.RELEASE</org.springframework-version>
@@ -20,10 +20,11 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<apache.tiles.version>3.0.8</apache.tiles.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- Spring -->
-		<!-- Only dependency we required for core spring framework, it has transitive depednecy on spring-core -->
+		<!-- Only dependency we required for core spring framework, it has transitive 
+			depednecy on spring-core -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -36,14 +37,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- Only dependency we require for spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-	
+
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -56,11 +57,17 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>5.1.2.RELEASE</version>
 		</dependency>
-			
-	
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>5.1.3.RELEASE</version>
+		</dependency>
+
 		<!-- AspectJ -->
-		<!-- By default spring mvc template created dependency on aspectjrt, which is old one. So, I changed it to below one.
-		This is the only dependency required for spring AOP -->
+		<!-- By default spring mvc template created dependency on aspectjrt, which 
+			is old one. So, I changed it to below one. This is the only dependency required 
+			for spring AOP -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -110,29 +117,29 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-	
+
 		<!-- Form validation using Java Validation API (JSR-303) -->
 		<!-- Spring's support for bean validation via Hibernate as a implementation -->
-		<!-- Spring itself do not provides implementation of JS$-303 rather it supports use of it. Rather we just need to add 
-		JSR-303 implementation jars to project's classpath-->
+		<!-- Spring itself do not provides implementation of JS$-303 rather it 
+			supports use of it. Rather we just need to add JSR-303 implementation jars 
+			to project's classpath -->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>6.0.13.Final</version>
 		</dependency>
 
-		<!-- It was initially present in created project, I don't know why they addded this dependecy, because I used this dependency for
-		@Inject annotation which can be used in place of @Component, currently commenting this, as project able to build and run, Will uncomment if required -->
-		<!-- @Inject
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency> -->
+		<!-- It was initially present in created project, I don't know why they 
+			addded this dependecy, because I used this dependency for @Inject annotation 
+			which can be used in place of @Component, currently commenting this, as project 
+			able to build and run, Will uncomment if required -->
+		<!-- @Inject <dependency> <groupId>javax.inject</groupId> <artifactId>javax.inject</artifactId> 
+			<version>1</version> </dependency> -->
 
 		<!-- Servlet -->
-		<!-- In order to use Annotation based spring config for mvc using, ServletContainerInitializer interface in servlet 3.1 specification,
-		we need to insuer that this dependency has minimum version of 3.1.0 -->
+		<!-- In order to use Annotation based spring config for mvc using, ServletContainerInitializer 
+			interface in servlet 3.1 specification, we need to insuer that this dependency 
+			has minimum version of 3.1.0 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -140,15 +147,17 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Always remember that, jstl library is not provided by servlet containers like tomcat, so it's scope should not be provided and should be
-		compile in order to ship this jar in generated war -->
+		<!-- Always remember that, jstl library is not provided by servlet containers 
+			like tomcat, so it's scope should not be provided and should be compile in 
+			order to ship this jar in generated war -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
-		<!-- Apache tiles 3.** (Is only dependency we need for apache tiles). This dependency is required to access ties jstl tag library-->
+
+		<!-- Apache tiles 3.** (Is only dependency we need for apache tiles). This 
+			dependency is required to access ties jstl tag library -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-extras</artifactId>
@@ -156,7 +165,8 @@
 		</dependency>
 
 		<!-- Test -->
-		<!-- Minimum version of junit required for spring mvc test framework is 4.12 so, I need to upgrade this dependency -->
+		<!-- Minimum version of junit required for spring mvc test framework is 
+			4.12 so, I need to upgrade this dependency -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -165,27 +175,28 @@
 		</dependency>
 
 		<!-- hamcrest -->
-		<!-- Most of spring mvc takes Matchers as a argume. So, we need to use this library for better assertions -->
+		<!-- Most of spring mvc takes Matchers as a argume. So, we need to use 
+			this library for better assertions -->
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<!-- This is for mocking the service -->
- 
+
 		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <version>1.9.5</version>
-		    <scope>test</scope>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -193,7 +204,7 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
-	
+
 		<!-- Spring Data -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -206,20 +217,20 @@
 			<artifactId>hsqldb</artifactId>
 			<version>2.4.1</version>
 		</dependency>
-	
+
 		<!-- Spring Ldap -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-ldap</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.apache.directory.server</groupId>
 			<artifactId>apacheds-server-jndi</artifactId>
 			<version>1.5.5</version>
 		</dependency>
-		
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -244,7 +255,8 @@
 				<configuration>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
-					<!-- These are java compiler's non-standard options to enable logging of any warning during project compilation. -->
+					<!-- These are java compiler's non-standard options to enable logging 
+						of any warning during project compilation. -->
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
@@ -259,9 +271,11 @@
 				</configuration>
 			</plugin>
 
-			<!-- Important, event though this plugin already exists in maven dynamic project, we need to override it's configuration <failOnMissingWebXml> 
-			In case of Annotation based spring mvc project set up, we won't be using web.xml, so maven will give build time error about absence of web.xml file, so in order to 
-			suppress that error we need to override it using configuration-->
+			<!-- Important, event though this plugin already exists in maven dynamic 
+				project, we need to override it's configuration <failOnMissingWebXml> In 
+				case of Annotation based spring mvc project set up, we won't be using web.xml, 
+				so maven will give build time error about absence of web.xml file, so in 
+				order to suppress that error we need to override it using configuration -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
