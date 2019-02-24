@@ -163,6 +163,7 @@ public class WebConfig implements WebMvcConfigurer { // WebMvcConfigurerAdapter 
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/homePage").setViewName("home"); // This says, when url is /homePage render view with logical view name "home". NOTE: It uses configured ViewResolver for determining actual view instance and implementation for same.
 		registry.addViewController("/fileupload").setViewName("fileUpload");
+		registry.addViewController("/login").setViewName("login"); // we do not want to add any logic while rendering the login view, so we do not need to define controller handler for this, so I am declaring it here as mapping between url and view name.
 	}
 	
 	/**

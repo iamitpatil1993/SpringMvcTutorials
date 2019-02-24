@@ -61,4 +61,18 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/errors/forbidden.jsp" />
 	</definition>
+	
+	<!-- Defining custom login page tile. -->
+	<definition name="login" extends="spittle.base">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/login.jsp" />
+	</definition>
+	
+	<!-- File upload page tile declaration -->
+	<definition name="fileUpload" extends="spittle.base">
+		<put-attribute name="title" value="File upload" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/fileUpload.jsp" />
+	</definition>
 </tiles-definitions>
