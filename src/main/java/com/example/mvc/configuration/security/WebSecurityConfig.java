@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.example.mvc.configuration.springsecurity.ldap.LDAPGrantedAuthoritiesMapper;
 import com.example.mvc.configuration.springsecurity.ldap.SecurityRoles;
@@ -27,6 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // this ad
 	@Autowired
 	private DataSource dataSource;
 	
+	/**
+	 * Autowire our custom defined LoginSuccessHandler in order to pass it to http handler.
+	 */
+	@Autowired
+	private AuthenticationSuccessHandler authenticationSuccessHandler;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -35,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // this ad
 		.antMatchers("/files/upload", "/fileupload").authenticated() // this says authenticate request to urls matching this url, and can have any role
 		.anyRequest().permitAll().and() // any request other than mentioned above should be accessible witout authentication
 		.formLogin() // mode of authentication should be login page, witthuoud configuring this, it will not redirect u to login page if session expired, or authentication required rather simply give 403 error pgae.
-		.loginPage("/login"); // we want to provide our own login page, so we provided spring url to which it should redirect in case of login required. It's our responsibility to render login view when GET - /login is requested. 
-		
+		.loginPage("/login") // we want to provide our own login page, so we provided spring url to which it should redirect in case of login required. It's our responsibility to render login view when GET - /login is requested. 
+		.successHandler(authenticationSuccessHandler); // pass our custom loin success handler
 	}
 	
 	/**
@@ -84,4 +91,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // this ad
 		.passwordEncoder(NoOpPasswordEncoder.getInstance());
 	}
 	*/
+	
 }
