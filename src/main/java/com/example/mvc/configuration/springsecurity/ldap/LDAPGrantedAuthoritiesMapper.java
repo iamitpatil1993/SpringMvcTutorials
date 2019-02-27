@@ -48,6 +48,9 @@ public class LDAPGrantedAuthoritiesMapper implements GrantedAuthoritiesMapper {
 			if (ROLE_SPITTLE.equals(authority.getAuthority())) {
 				roles.add(SecurityRoles.ROLE_SPITTLE);
 			}
+			if (SecurityRoles.ROLE_USER.toString().equals(authority.getAuthority())) {
+				roles.add(SecurityRoles.ROLE_USER);
+			}
 		}
 		LOGGER.info("Out with authorities :: {}", roles);
 		return roles;

@@ -156,6 +156,14 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- This is standard jstl function library, provides useful functions to use.-->
+		<dependency>
+		    <groupId>taglibs</groupId>
+		    <artifactId>standard</artifactId>
+		    <version>1.1.2</version>
+		</dependency>
+
+
 		<!-- Apache tiles 3.** (Is only dependency we need for apache tiles). This 
 			dependency is required to access ties jstl tag library -->
 		<dependency>

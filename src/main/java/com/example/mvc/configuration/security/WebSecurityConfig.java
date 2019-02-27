@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // this ad
 		http
 		.authorizeRequests()
 		.antMatchers("/spittles/**").hasAuthority(SecurityRoles.ROLE_SPITTLE.toString()) // this says authenticate request to urls matching this url, and user must have role of 'SPITLE'
-		.antMatchers("/files/upload", "/fileupload").authenticated() // this says authenticate request to urls matching this url, and can have any role
+		.antMatchers("/files/upload", "/fileupload").hasAnyAuthority(SecurityRoles.ROLE_USER.toString(), SecurityRoles.ROLE_SPITTLE.toString()) // this says authenticate request to urls matching this url, and can have any role
 		.anyRequest().permitAll().and() // any request other than mentioned above should be accessible witout authentication
 		.formLogin() // mode of authentication should be login page, witthuoud configuring this, it will not redirect u to login page if session expired, or authentication required rather simply give 403 error pgae.
 		.loginPage("/login") // we want to provide our own login page, so we provided spring url to which it should redirect in case of login required. It's our responsibility to render login view when GET - /login is requested. 
